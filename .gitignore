@@ -1,0 +1,14 @@
+build
+*.so
+
+pcdet.egg-info
+__pycache__
+version.py
+*.npy
+
+*.tar
+results
+output*
+*.pkl
+.trash
+model_zoo
