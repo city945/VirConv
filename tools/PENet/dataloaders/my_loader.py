@@ -395,6 +395,7 @@ def depth2pointsrgbp(depth, image, calib, lidar):
 
     new_p = np.zeros(shape=(uv[0].shape[0], 8))
 
+    # y,x,depth 三个值
     p_rect = calib.img_to_rect(uv[1], uv[0], depth_val)
     p_lidar = calib.rect_to_lidar(p_rect)
     new_p[:, 0:3] = p_lidar
@@ -413,6 +414,10 @@ def depth2pointsrgbp(depth, image, calib, lidar):
     #new_p = voxel_sampling(new_p)
     #new_p = range_sampling_torch(new_p, new_lidar, calib)
 
+    # import ipdb; ipdb.set_trace()
+    # depth.shape: (352, 1216, 1) hwc，深度值
+    # p_lidar.shape: (352*1216, 3) xyz
+    # new_p: xyz0 rgb 1 ;new_lidar: xyzi 000 2; 1 为虚拟点，2为激光点
     all_points = np.concatenate([new_lidar, new_p], 0)
 
     return all_points

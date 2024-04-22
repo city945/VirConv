@@ -151,6 +151,13 @@ def save_depth_as_points(depth, idx, root_path):
     final_points = final_points.astype(np.float16)
     np.save(out_path, final_points)
 
+    # 保存深度图
+    paths = os.path.join(root_path, 'image_2_depth')
+    if not os.path.exists(paths):
+        os.makedirs(paths)
+    out_path = os.path.join(paths, file_idx + '.npy')
+    depth[depth<0.01] = 0
+    np.save(out_path, depth)
 
 def save_depth_as_uint16png_upload(img, filename):
     #from tensor
